@@ -7,7 +7,7 @@ pipeline {
 	stages { 
 		stage('source') {
 			steps {
-				git branch: 'main', url: ''https://github.com/mdabuateef/multitest.git'
+				git branch: 'main', url: 'https://github.com/mdabuateef/multitest.git'
 				}
 			}
 		stage('build') {
