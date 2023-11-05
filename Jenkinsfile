@@ -32,7 +32,7 @@ pipeline {
             steps {
 	    	echo "starting deploy stage"
                 script {
-                    sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASS}"
+                    sh "sudo docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASS}"
                     sh "docker push mdabudoc/open:${BUILD_NUMBER}"
                 }
             }
