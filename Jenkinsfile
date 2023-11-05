@@ -7,6 +7,7 @@ pipeline {
     stages {
         stage('source') {
             steps {
+	    	echo "Starting source stage"
                 git branch: 'main', url: 'https://github.com/mdabuateef/multitest.git'
             }
         }
@@ -21,6 +22,7 @@ pipeline {
         }
         stage('docker-build') {
             steps {
+	    	echo "strting build stage"
                 script {
                     sh 'sudo docker build -t docker_repo:latest /var/lib/jenkins/workspace/docker-pipe'
                 }
@@ -28,6 +30,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
+	    	echo "starting deploy stage"
                 script {
                     sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASS}"
                     sh "docker push mdabudoc/open:${BUILD_NUMBER}"
