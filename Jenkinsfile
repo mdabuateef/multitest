@@ -2,33 +2,14 @@ pipeline {
     agent any
     tools {
         maven 'Maven'
-
-    stages {
-        stage ('Compile Stage') {
-
-            steps {
-                withMaven(maven : 'maven') {
-                    sh 'mvn clean compile'
-                }
-            }
-        }
-
-        stage ('Testing Stage') {
-
-            steps {
-                withMaven(maven : 'maven') {
-                    sh 'mvn test'
-                }
-            }
-        }
-
-
-        stage ('Deployment Stage') {
-            steps {
-                withMaven(maven : 'maven') {
-                    sh 'mvn deploy'
-                }
-            }
-        }
     }
+ stage('Build') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    withMaven {
+                        sh 'mvn clean verify sonar:sonar'
+                    }
+                }
+            }
+        }
 }
